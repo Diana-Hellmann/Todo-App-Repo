@@ -33,15 +33,14 @@ h2{
     justify-content: space-evenly;
 }
 .container-listen div{
-    padding: 1rem 0;
     width: 20rem;
+    height: 28rem;
+    background-color: rgb(203, 243, 180);
+    padding: 1rem 0;
     position: relative;
-
 }
 ul{
-    height: 28rem;
     list-style: none;
-    background-color: rgb(203, 243, 180);
 }
 li{
     padding: 0.5rem 1rem;
@@ -55,15 +54,14 @@ li{
     text-overflow: ellipsis;
 }
 button{
-    font-size: 40px;
+    font-size: 26px;
     background-color: rgb(225, 247, 212);
-    padding: 0 0.6rem;
+    padding: 0.1rem 0.4rem;
     border: 2px solid green;
     border-radius: 2rem;
     position: absolute;
-    bottom: 1rem;
     left: 50%;
     /*verschiebt Btn um 50% seiner Breite nach links*/
     transform: translateX(-50%);
-}
+} 
 
