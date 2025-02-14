@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Todo-App</title>
 </head>
 <body>
@@ -15,28 +15,28 @@
         <div class="container-listen">
             <div>
                 <h2>Tagesziele</h2>
-                <ul class="tag">
+                <ul id="ul-tag">
                     <li class="beispiel-liste">Tagesziel</li>
                     <li class="beispiel-liste">Lorem ipsum dolor sit amet consectetur ipsum</li>
                     <li class="beispiel-liste">Lorem ipsum dolor sit amet</li>
                 </ul>
-                <button>+</button>
+                <button id="btn-tag" class="btn-add">+</button>
             </div>
              
             <div>
                 <h2>Wochenziele</h2>
-                <ul class="woche">
+                <ul id="ul-woche">
                     <li class="beispiel-liste">Wochenziel</li>
                 </ul>
-                <button>+</button>
+                <button id="btn-woche" class="btn-add">+</button>
             </div>
 
             <div>
                 <h2>Monatsziele</h2>
-                <ul class="monat">
+                <ul id="ul-monat">
                     <li class="beispiel-liste">Monatsziel</li>
                 </ul>
-                <button>+</button>
+                <button id="btn-monat" class="btn-add">+</button>
             </div>
         </div>  
     </div>

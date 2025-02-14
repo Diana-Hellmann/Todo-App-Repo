@@ -13,6 +13,7 @@ header{
     padding: 2rem 0 3rem;
     background-color: rgb(203, 243, 180);
     border: 28px solid rgb(183, 252, 143);
+    border-bottom: 36px solid rgb(183, 252, 143);
 }
 h1{
     font-size: 42px;
@@ -34,7 +35,8 @@ h2{
 }
 .container-listen div{
     width: 20rem;
-    height: 28rem;
+    /* height: 28rem; */
+    height: 60vh;
     background-color: rgb(203, 243, 180);
     padding: 1rem 0;
     position: relative;
@@ -53,7 +55,7 @@ li{
     /*Punkte beim gekürzten Satz*/
     text-overflow: ellipsis;
 }
-button{
+.btn-add{
     font-size: 26px;
     background-color: rgb(225, 247, 212);
     padding: 0.1rem 0.4rem;
