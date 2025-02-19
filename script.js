@@ -8,6 +8,23 @@ function createTask(){
     return neuesLi;
 }
 
+function validateTask(task){
+
+    //vor Inhaltsprüfung Btn entfernen
+    const btn = task.querySelector("button");
+    if(btn){
+        btn.remove();
+    }
+
+    //mögl. Leerzeichen entfernen
+    const taskContent = task.innerText.trim();
+    //prüfen, ob Task leer
+    if(taskContent == "" || taskContent == "Aufgabe"){
+        alert("Bitte Text eingeben!");
+        return;
+    } 
+}
+
 function addTask(event){
     const btn = event.target;  
     // Liste zum Btn finden
@@ -20,6 +37,12 @@ function addTask(event){
         liste.appendChild(neuesLi);
         //damit Cursor sofort da ist
         neuesLi.focus();
+
+        //wenn verlassen, prüfen ob Inhalt
+        neuesLi.addEventListener("blur", () => {
+            validateTask(neuesLi);
+        });
+
     }
 }
 
