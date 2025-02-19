@@ -38,7 +38,7 @@ h2{
     /* height: 28rem; */
     height: 60vh;
     background-color: rgb(203, 243, 180);
-    padding: 1rem 0;
+    padding: 1rem 2rem;
     position: relative;
 }
 ul{
@@ -49,21 +49,38 @@ li{
     background-color: rgb(225, 247, 212);
     border: 2px solid green;
     border-radius: 2rem;
-    height: 3rem;
+    /* height: 3rem; */
     overflow: hidden;
     white-space: nowrap;
     /*Punkte beim gekürzten Satz*/
     text-overflow: ellipsis;
+    position: relative;
+}
+.ausgeklappt{
+    white-space: normal;    
+    overflow: visible;      
+    text-overflow: unset;   
+    cursor: text;              
 }
 .btn-add{
     font-size: 26px;
     background-color: rgb(225, 247, 212);
-    padding: 0.1rem 0.4rem;
+    padding: 0 0.4rem;
     border: 2px solid green;
     border-radius: 2rem;
     position: absolute;
     left: 50%;
     /*verschiebt Btn um 50% seiner Breite nach links*/
     transform: translateX(-50%);
-} 
+}
+.btn-delete{
+    font-size: 18px;
+    border: 2px solid green;
+    border-radius: 2rem;
+    padding: 0 0.4rem;
+    position: absolute;
+    right: 0.5rem;
+
+  
+}
 
