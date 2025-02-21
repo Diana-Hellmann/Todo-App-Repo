@@ -58,7 +58,7 @@ ul{
 }
 li{
     padding: 1rem;
-    padding-right: 2rem;
+    padding-right: 3rem;
     margin-bottom: 1rem;
     background-color: rgb(244, 252, 239);
     border: 2px solid rgb(2, 158, 2);
@@ -91,17 +91,24 @@ li{
     transform: translateX(-50%);
 }
 .btn-add i{
+    /*Klicks an Btn weiterleiten*/
+    pointer-events: none;
     font-size: 25px;
 }
 .btn-delete{
     font-size: 18px;
-    border: 2px solid green;
-    border-radius: 2rem;
+    background-color: rgb(244, 252, 239);
+    color: rgb(3, 132, 3);
+    /* border: 2px solid green; */
+    /* border-radius: 2rem; */
     padding: 0 0.4rem;
     position: absolute;
     right: 0.5rem;
     top: 50%;
     /* Vertikale Mitte */
     transform: translateY(-50%); 
+}
+.btn-delete i{
+    pointer-events: none;
 }
 

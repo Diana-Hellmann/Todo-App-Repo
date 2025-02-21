@@ -4,7 +4,7 @@ function createTask(){
     //damit direkt beschreibbar
     neuesLi.setAttribute("contentEditable", "true");
     // X-Button hinzufügen
-    neuesLi.innerHTML = `Aufgabe <button class="btn-delete">X</button>`;
+    neuesLi.innerHTML = `Aufgabe <button class="btn-delete"><i class="fa-solid fa-trash-can"></button>`;
     return neuesLi;
 }
 
@@ -27,7 +27,7 @@ function fehlermeldung(event){
 
 }
 
-function validateTask(task){
+function hasError(task){
 
     //vor Inhaltsprüfung Btn entfernen, jedes Feld wird geprüft, also wird bei jedem Feld der Btn entfernt
     const btn = task.querySelector("button");
@@ -37,9 +37,12 @@ function validateTask(task){
 
     const taskContent = task.innerText.trim();
     //prüfen, ob Task leer
-    if(taskContent == "" || taskContent == "Aufgabe") fehlermeldung(task);
-        //btn nach Prüfung wieder hinzufügen, muss außerhalb der if, weil er immer hinzugefügt werden muss
-        task.appendChild(btn);  
+    if(taskContent == "" || taskContent == "Aufgabe"){
+        fehlermeldung(task);
+        return true;
+    };
+    //btn nach Prüfung wieder hinzufügen, muss außerhalb der if, weil er immer hinzugefügt werden muss
+    task.appendChild(btn);  
 }
 
 function addTask(event){
@@ -49,17 +52,23 @@ function addTask(event){
     const liste = document.getElementById(listeId);
     
     //prüfen, ob Liste existiert
-    if (liste) { 
-        const neuesLi = createTask();
-        liste.appendChild(neuesLi);
-        //damit Cursor sofort da ist
-        neuesLi.focus();
+    if (liste) {   
+        //some damit bool angenommen wird
+        const leeresLi = Array.from(liste.children).some(li => hasError(li));
+       
+        if(leeresLi){
+            return;
+        } else{
+            const neuesLi = createTask();
+            liste.appendChild(neuesLi);
+            //damit Cursor sofort da ist
+            neuesLi.focus();
 
-        //wenn verlassen, prüfen ob Inhalt
-        neuesLi.addEventListener("blur", () => {
-            validateTask(neuesLi);
-        });
-
+            //wenn verlassen, prüfen ob Inhalt
+            neuesLi.addEventListener("blur", () => {
+                hasError(neuesLi);
+            });
+        }; 
     }
 }
 
@@ -89,7 +98,7 @@ document.querySelectorAll("ul").forEach(ul => {
         console.log(event.target);
         if(event.target.tagName == "LI")
         //event target übergeben
-        validateTask(event.target);
+        hasError(event.target);
     })
 });
 
