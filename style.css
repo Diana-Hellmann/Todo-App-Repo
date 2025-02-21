@@ -11,45 +11,60 @@ body{
 header{
     text-align: center;
     padding: 2rem 0 3rem;
-    background-color: rgb(203, 243, 180);
-    border: 28px solid rgb(183, 252, 143);
-    border-bottom: 36px solid rgb(183, 252, 143);
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #9adf4b, #4caf50);
+    color: white;
+    border-bottom: 5px solid rgb(1, 150, 1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
 }
 h1{
     font-size: 42px;
 }
 h2{
-    margin-bottom: 1rem;
+    margin: 2rem;
     font-size: 28px;
     text-align: center;
 }
 .container{
     margin: 0 auto;
-    background-color: rgb(183, 252, 143);
-    width: 80%;
+    /* background-color: rgb(183, 252, 143); */
+    width: 70%;
     height: 100vh;
 }
 .container-listen{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
-.container-listen div{
-    width: 20rem;
-    /* height: 28rem; */
-    height: 60vh;
-    background-color: rgb(203, 243, 180);
+.container-einzelne-liste{
+    width: 26rem;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: rgb(222, 247, 208);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
+    margin-bottom: 3rem;
     position: relative;
+}
+.fehlermeldung{
+    background-color: rgb(244, 252, 239);
+    border: 3px solid rgb(226, 58, 58);
+    padding: 0.5rem;
+    font-size: 16px;
+    display: none;
 }
 ul{
     list-style: none;
 }
 li{
-    padding: 0.5rem 1rem;
-    background-color: rgb(225, 247, 212);
-    border: 2px solid green;
-    border-radius: 2rem;
-    /* height: 3rem; */
+    padding: 1rem;
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+    background-color: rgb(244, 252, 239);
+    border: 2px solid rgb(2, 158, 2);
+    border-radius: 1rem;
+    /*damit auch ohne Inhalt min-Größe*/
+    min-height: 3rem;
     overflow: hidden;
     white-space: nowrap;
     /*Punkte beim gekürzten Satz*/
@@ -63,15 +78,20 @@ li{
     cursor: text;              
 }
 .btn-add{
-    font-size: 26px;
-    background-color: rgb(225, 247, 212);
-    padding: 0 0.4rem;
-    border: 2px solid green;
-    border-radius: 2rem;
+    /* font-size: 26px; */
+    background-color: #51bd55;
+    color: white;
+    padding: 0.6rem;
+    border: 2px solid rgb(2, 158, 2);
+    border-radius: 1rem;
+    /* margin-bottom: 2rem; */
     position: absolute;
     left: 50%;
-    /*verschiebt Btn um 50% seiner Breite nach links*/
+    /* verschiebt Btn um 50% seiner Breite nach links */
     transform: translateX(-50%);
+}
+.btn-add i{
+    font-size: 25px;
 }
 .btn-delete{
     font-size: 18px;
@@ -80,7 +100,8 @@ li{
     padding: 0 0.4rem;
     position: absolute;
     right: 0.5rem;
-
-  
+    top: 50%;
+    /* Vertikale Mitte */
+    transform: translateY(-50%); 
 }
 

@@ -8,21 +8,38 @@ function createTask(){
     return neuesLi;
 }
 
+function fehlermeldung(event){
+    //parent finden
+    let container = event.closest("div");
+    let fehler = container.querySelector(".fehlermeldung");
+
+    //prüfen, ob das richtige Element angekommen ist
+    if (fehler && fehler.classList.contains("fehlermeldung")) { 
+        fehler.style.display = "block";
+        event.style.border = "3px solid rgb(226, 58, 58)";
+
+        //nach 3 Sekunden Fehlermeldung entfernen
+        setTimeout(() => {
+            fehler.style.display = "none";
+            event.style.border = "2px solid green";
+        }, 3000);
+    }
+
+}
+
 function validateTask(task){
 
-    //vor Inhaltsprüfung Btn entfernen
+    //vor Inhaltsprüfung Btn entfernen, jedes Feld wird geprüft, also wird bei jedem Feld der Btn entfernt
     const btn = task.querySelector("button");
     if(btn){
         btn.remove();
     }
 
-    //mögl. Leerzeichen entfernen
     const taskContent = task.innerText.trim();
     //prüfen, ob Task leer
-    if(taskContent == "" || taskContent == "Aufgabe"){
-        alert("Bitte Text eingeben!");
-        return;
-    } 
+    if(taskContent == "" || taskContent == "Aufgabe") fehlermeldung(task);
+        //btn nach Prüfung wieder hinzufügen, muss außerhalb der if, weil er immer hinzugefügt werden muss
+        task.appendChild(btn);  
 }
 
 function addTask(event){
@@ -66,6 +83,15 @@ function ausklappen(event){
        });
    }
 }
+//ul blur event, blur blubbert nicht, focusout schon
+document.querySelectorAll("ul").forEach(ul => {
+    ul.addEventListener("focusout", (event) => {
+        console.log(event.target);
+        if(event.target.tagName == "LI")
+        //event target übergeben
+        validateTask(event.target);
+    })
+});
 
 //add btn bei Click 
 document.querySelectorAll(".btn-add").forEach(btn => {

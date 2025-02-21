@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Todo-App</title>
 </head>
 <body>
@@ -13,30 +14,33 @@
             <h1>Todo-App</h1>
         </header>
         <div class="container-listen">
-            <div>
+            <div class="container-einzelne-liste">
                 <h2>Tagesziele</h2>
                 <ul id="ul-tag">
                     <li class="beispiel-liste">Tagesziel <button class="btn-delete">x</button></li>
                     <li class="beispiel-liste">Lorem ipsum dolor sit amet consectetur ipsum <button class="btn-delete">x</button></li>
                     <li class="beispiel-liste">Lorem ipsum dolor sit amet <button class="btn-delete">x</button></li>
                 </ul>
-                <button id="btn-tag" class="btn-add">+</button>
+                <button id="btn-tag" class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                <p class="fehlermeldung">Die Aufgabe darf nicht leer sein.</p>
             </div>
              
-            <div>
+            <div class="container-einzelne-liste">
                 <h2>Wochenziele</h2>
                 <ul id="ul-woche">
                     <li class="beispiel-liste">Wochenziel <button class="btn-delete">x</button></li>
                 </ul>
-                <button id="btn-woche" class="btn-add">+</button>
+                <button id="btn-woche" class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                <p class="fehlermeldung">Die Aufgabe darf nicht leer sein.</p>
             </div>
 
-            <div>
+            <div class="container-einzelne-liste">
                 <h2>Monatsziele</h2>
                 <ul id="ul-monat">
                     <li class="beispiel-liste">Monatsziel <button class="btn-delete">x</button></li>
                 </ul>
-                <button id="btn-monat" class="btn-add">+</button>
+                <button id="btn-monat" class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                <p class="fehlermeldung">Die Aufgabe darf nicht leer sein.</p>
             </div>
         </div>  
     </div>
