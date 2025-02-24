@@ -1,4 +1,3 @@
-let deleteClicked = false;
 //Funktionen auslagern
 function createTask(){
     const neuesLi = document.createElement("li");
@@ -10,11 +9,6 @@ function createTask(){
 }
 
 function fehlermeldung(event){
-    if(deleteClicked){
-        deleteClicked = false;
-        return;
-    }
-
     //parent finden
     let container = event.closest("div");
     let fehler = container.querySelector(".fehlermeldung");
@@ -34,14 +28,10 @@ function fehlermeldung(event){
 }
 
 function hasError(task){
-
     const cleanedText = task.textContent.trim();
-
     //prüfen, ob Task leer
-    if(cleanedText == "" || cleanedText == "Aufgabe"){
-        fehlermeldung(task);
-        return true;
-    };
+    if(cleanedText == "" || cleanedText == "Aufgabe") return true;
+    return false;
 }
 
 function addTask(event){
@@ -72,23 +62,8 @@ function addTask(event){
 }
 
 function removeTask(event){
-    deleteClicked = true;
     const li = event.target.closest("li");
     if (li) li.remove(); 
-    // if (li) {
-    //     setTimeout(() => li.remove(), 0);  // Verzögerung, damit andere Events nicht stören
-    // }
-
-    // setTimeout(() => {
-    //     const li = event.target.closest("li");
-    //     if (li) li.remove();
-    // }, 0);
-
-      
-    // if (li) {
-    //     li.remove(); // Task sofort entfernen
-    //     event.stopImmediatePropagation(); // Verhindert, dass das Event weiter "blubbert" und Konflikte erzeugt
-    // }
 }
 
 function ausklappen(event){
@@ -108,10 +83,9 @@ function ausklappen(event){
 //ul blur event, blur blubbert nicht, focusout schon
 document.querySelectorAll("ul").forEach(ul => {
     ul.addEventListener("focusout", (event) => {
-        if(event.target.tagName == "LI")
-        //event target übergeben
-        // console.log(event.target);
-        hasError(event.target);
+        console.log(hasError(event.target));
+        if(event.target.tagName == "LI" && hasError(event.target)) fehlermeldung(event.target);
+        return;
     })
 });
 
