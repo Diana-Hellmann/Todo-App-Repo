@@ -62,6 +62,7 @@ function addTask(event){
 }
 
 function removeTask(event){
+
     const li = event.target.closest("li");
     if (li) li.remove(); 
 }
@@ -83,8 +84,10 @@ function ausklappen(event){
 //ul blur event, blur blubbert nicht, focusout schon
 document.querySelectorAll("ul").forEach(ul => {
     ul.addEventListener("focusout", (event) => {
-        console.log(hasError(event.target));
-        if(event.target.tagName == "LI" && hasError(event.target)) fehlermeldung(event.target);
+        if(event.target.tagName == "LI" && !event.relatedTarget?.classList.contains("btn-delete")){
+            if(hasError(event.target)) fehlermeldung(event.target);
+
+        } 
         return;
     })
 });
