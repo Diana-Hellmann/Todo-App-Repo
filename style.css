@@ -90,6 +90,9 @@ li{
     /* verschiebt Btn um 50% seiner Breite nach links */
     transform: translateX(-50%);
 }
+.btn-add:hover{
+    cursor: pointer;
+}
 .btn-add i{
     /*Klicks an Btn weiterleiten*/
     pointer-events: none;
@@ -107,6 +110,11 @@ li{
     top: 50%;
     /* Vertikale Mitte */
     transform: translateY(-50%); 
+}
+.btn-delete:hover{
+    color: rgb(226, 58, 58);
+    font-size: 22px;
+    cursor: pointer;
 }
 .btn-delete i{
     pointer-events: none;

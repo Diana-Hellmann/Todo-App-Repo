@@ -1,3 +1,4 @@
+let deleteClicked = false;
 //Funktionen auslagern
 function createTask(){
     const neuesLi = document.createElement("li");
@@ -9,10 +10,16 @@ function createTask(){
 }
 
 function fehlermeldung(event){
+    if(deleteClicked){
+        deleteClicked = false;
+        return;
+    }
+
     //parent finden
     let container = event.closest("div");
     let fehler = container.querySelector(".fehlermeldung");
 
+    
     //prüfen, ob das richtige Element angekommen ist
     if (fehler && fehler.classList.contains("fehlermeldung")) { 
         fehler.style.display = "block";
@@ -24,25 +31,17 @@ function fehlermeldung(event){
             event.style.border = "2px solid green";
         }, 3000);
     }
-
 }
 
 function hasError(task){
 
-    //vor Inhaltsprüfung Btn entfernen, jedes Feld wird geprüft, also wird bei jedem Feld der Btn entfernt
-    const btn = task.querySelector("button");
-    if(btn){
-        btn.remove();
-    }
+    const cleanedText = task.textContent.trim();
 
-    const taskContent = task.innerText.trim();
     //prüfen, ob Task leer
-    if(taskContent == "" || taskContent == "Aufgabe"){
+    if(cleanedText == "" || cleanedText == "Aufgabe"){
         fehlermeldung(task);
         return true;
     };
-    //btn nach Prüfung wieder hinzufügen, muss außerhalb der if, weil er immer hinzugefügt werden muss
-    task.appendChild(btn);  
 }
 
 function addTask(event){
@@ -73,9 +72,23 @@ function addTask(event){
 }
 
 function removeTask(event){
-    //li vom x-btn finden
+    deleteClicked = true;
     const li = event.target.closest("li");
-    if (li) li.remove();
+    if (li) li.remove(); 
+    // if (li) {
+    //     setTimeout(() => li.remove(), 0);  // Verzögerung, damit andere Events nicht stören
+    // }
+
+    // setTimeout(() => {
+    //     const li = event.target.closest("li");
+    //     if (li) li.remove();
+    // }, 0);
+
+      
+    // if (li) {
+    //     li.remove(); // Task sofort entfernen
+    //     event.stopImmediatePropagation(); // Verhindert, dass das Event weiter "blubbert" und Konflikte erzeugt
+    // }
 }
 
 function ausklappen(event){
@@ -95,9 +108,9 @@ function ausklappen(event){
 //ul blur event, blur blubbert nicht, focusout schon
 document.querySelectorAll("ul").forEach(ul => {
     ul.addEventListener("focusout", (event) => {
-        console.log(event.target);
         if(event.target.tagName == "LI")
         //event target übergeben
+        // console.log(event.target);
         hasError(event.target);
     })
 });
