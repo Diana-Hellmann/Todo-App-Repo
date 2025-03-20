@@ -1,12 +1,25 @@
+ //Id des letzten li aus Liste holen, muss global für create
+//  let containerTag = document.getElementById("ul-tag");
+//  lastChildTag = containerTag.lastElementChild;
+
+//  let containerWoche = document.getElementById("ul-woche");
+//  lastChildTag = containerWoche.lastElementChild;
+
+//  let containerMonat = document.getElementById("ul-monat");
+//  lastChildTag = containerMonat.lastElementChild;
+
 //Funktionen auslagern
 function createTask(){
     const neuesLi = document.createElement("li");
     //damit direkt beschreibbar
-    neuesLi.setAttribute("contentEditable", "true");
+    neuesLi.contentEditable = true;
+    neuesLi.draggable = true;
+
     // X-Button hinzufügen
     neuesLi.innerHTML = `Aufgabe <button class="btn-delete"><i class="fa-solid fa-trash-can"></button>`;
     return neuesLi;
 }
+
 
 function fehlermeldung(event){
     //parent finden
@@ -34,6 +47,20 @@ function hasError(task){
     return false;
 }
 
+function idGenerieren(liste, neuesLi){
+    let lastChild = liste.lastElementChild;              
+    let alteId = lastChild.id;
+    //split teilt am Strich und entfernt ihn, slice für Teilarray - letztes Zeichen,
+    // join fügt Arrayplätze zusammen mit -
+    let idOhneZahl = alteId.split("-").slice(0, -1).join("-");
+    //pop nimmt das letzte Zeichen und gibt es zurück
+    //nur Variablen, direkte Zahlen sind inkre., Rückgabewerte nicht
+    let zahlInk = parseInt(alteId.split("-").pop(), 10) + 1;
+    
+    let neueId = `${idOhneZahl}-${zahlInk}`;
+    neuesLi.id = neueId;
+}
+
 function addTask(event){
     const btn = event.target;  
     // Liste zum Btn finden
@@ -48,7 +75,26 @@ function addTask(event){
         if(leeresLi){
             return;
         } else{
-            const neuesLi = createTask();
+            let neuesLi = createTask();
+
+            //test
+            idGenerieren(liste, neuesLi);
+
+
+            //Zugriff auf Liste, hier sollte Id vergeben werden
+            // let lastChild = liste.lastElementChild;         
+            
+            // let alteId = lastChild.id;
+            // //split teilt am Strich und entfernt ihn, slice für Teilarray - letztes Zeichen,
+            // // join fügt Arrayplätze zusammen mit -
+            // let idOhneZahl = alteId.split("-").slice(0, -1).join("-");
+            // //pop nimmt das letzte Zeichen und gibt es zurück
+            // let zahlInk = parseInt(alteId.split("-").pop(), 10) ++;
+            
+            // let neueId = `${idOhneZahl}-${zahlInk}`;
+            // neuesLi.id = neueId;
+
+
             liste.appendChild(neuesLi);
             //damit Cursor sofort da ist
             neuesLi.focus();
@@ -81,6 +127,7 @@ function ausklappen(event){
        });
    }
 }
+
 //ul blur event, blur blubbert nicht, focusout schon
 document.querySelectorAll("ul").forEach(ul => {
     ul.addEventListener("focusout", (event) => {
@@ -103,6 +150,44 @@ document.querySelectorAll("ul").forEach(ul => {
         //li löschen
         if (event.target.classList.contains("btn-delete")) removeTask(event);
         ausklappen(event);
+    });
+});
+
+
+
+
+document.querySelectorAll("ul").forEach(liste => {
+    liste.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("text", event.target.id);
+    });
+
+    liste.addEventListener("dragover", (event) => {
+        event.preventDefault(); // Erlaubt das Droppen
+
+        const draggedElement = document.getElementById(event.dataTransfer.getData("text"));
+        const children = [...liste.children].filter(li => li !== draggedElement);
+
+        let closestLi = null;
+        let closestOffset = Number.NEGATIVE_INFINITY;
+
+        children.forEach(li => {
+            const box = li.getBoundingClientRect();
+            const offset = event.clientY - box.top - box.height / 2;
+            if (offset < 0 && offset > closestOffset) {
+                closestOffset = offset;
+                closestLi = li;
+            }
+        });
+
+        if (closestLi) {
+            liste.insertBefore(draggedElement, closestLi);
+        } else {
+            liste.appendChild(draggedElement);
+        }
+    });
+
+    liste.addEventListener("drop", (event) => {
+        event.preventDefault();
     });
 });
 
