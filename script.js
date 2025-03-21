@@ -155,7 +155,7 @@ document.querySelectorAll("ul").forEach(ul => {
 
 
 
-
+//funktioniert
 document.querySelectorAll("ul").forEach(liste => {
     liste.addEventListener("dragstart", (event) => {
         event.dataTransfer.setData("text", event.target.id);
@@ -190,5 +190,4 @@ document.querySelectorAll("ul").forEach(liste => {
         event.preventDefault();
     });
 });
-
 
